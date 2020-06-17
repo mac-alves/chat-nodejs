@@ -13,7 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@types/socket.io": "^2.1.8",
-    "ejs": "^2.7.1",
+    "ejs": "^2.7.4",
     "express": "^4.17.1",
     "knex": "^0.21.1",
     "socket.io": "^2.3.0",

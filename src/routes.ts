@@ -1,16 +1,13 @@
 import express from 'express';
-import knex from './database/connection';
 const routes = express.Router();
 
+import HomeController from './controllers/HomeController';
 import UserController from './controllers/UserController';
 
+const homeController = new HomeController();
 const userController = new UserController();
 
-routes.get('/', async (request, response) => {
-    const itens = await knex('itens').select('*');
-    
-    return response.json(itens);
-});
+routes.get('/', homeController.index);
 
 routes.get('/users', userController.index);
 routes.post('/users', userController.create);
