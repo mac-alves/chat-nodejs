@@ -1,8 +1,12 @@
-<%- include ../blocks/templates/head -%>
+<%- include ../blocks/templates/auth/head -%>
+    
     <form id="chat">
         <input type="text" name="username" placeholder="Usuario">
         <div class="messages"></div>
         <input type="text" name="mensage" placeholder="Mensagem">
         <button type="submit">Enviar</button>
     </form>
-<%- include ../blocks/templates/footer -%>
+
+    <button id="logout">Sair</button>
+
+<%- include ../blocks/templates/auth/footer -%>

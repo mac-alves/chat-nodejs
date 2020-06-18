@@ -3,18 +3,28 @@ import knex from '../database/connection';
  
 class UserController {
     async index(request: Request, response: Response) {
-        const users = await knex('users').select('*');
-
-        return response.json(users);
+        response.render('pages/register.ejs');
     }
 
-    async create(request: Request, response: Response){
+    async create(request: Request, response: Response){        
         const { name } = request.body;
+        const user = await knex('users').select('*').where('name', name);
+        
+        if (user.length > 0) {
+            return response.status(401).json({ 
+                error: 'Usuario ja existe!', 
+                success: false 
+            });
+        }
 
-        await knex('users').insert({ name });
+        const newUser = await knex('users').insert({ name });
 
-        return response.json({ success: true })
+        if (request.session) {
+            request.session.userId = newUser[0];
+        }
+        
+        return response.status(200).json({ error: '', success: true });
     }
 }
 
-export default UserController;  
+export default UserController;

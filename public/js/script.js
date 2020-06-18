@@ -1,19 +1,3 @@
-var socket = io('http://localhost:3000');
-
-function menssageRender(message) {
-    $('.messages').append('<div class="message"><strong>'+message.author+'</strong>:'+message.message+'</div>')
-}
-
-socket.on('previousMessages', function(messages){
-    for (message of messages) {
-        menssageRender(message);
-    }			
-});
-
-socket.on('receiveMessage', function(message){
-    menssageRender(message);
-});
-
 $('#chat').submit(function(event){
     event.preventDefault();
 
@@ -29,5 +13,39 @@ $('#chat').submit(function(event){
         menssageRender(mensageObject);
 
         socket.emit('sendMessage', mensageObject);
+    }
+});
+
+/**
+ * form de login
+ */
+$('#login').submit(function(event){
+    event.preventDefault();
+    var userName = $('#userName').val();
+
+    if (userName.length) {
+        $.post('/login', {name: userName}, () => {
+            responseSuccess();
+        }, error => {
+            console.log("Erro: ", error);
+            responseError(error.responseJSON.error)
+        });
+    }
+});
+
+/**
+ * form de registro de novo usuario
+ */
+$('#register').submit(function(event){
+    event.preventDefault();
+    var userName = $('#userName').val();
+
+    if (userName.length) {
+        $.post('/users', {name: userName}, () => {
+            responseSuccess();
+        }, error => {
+            console.log("Erro: ", error);
+            responseError(error.responseJSON.error)
+        });
     }
 });
