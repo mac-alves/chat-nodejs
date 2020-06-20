@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev src/server.ts",
-    "knex:migrate": "knex --knexfile knexfile.ts migrate:latest",
-    "knex:seed": "knex --knexfile knexfile.ts seed:run"
+    "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpileOnly --ignore-watch node_modules --no-notify src/server.ts",
+    "knex:migrate": "knex --knexfile src/knexfile.ts migrate:latest",
+    "knex:seed": "knex --knexfile src/knexfile.ts seed:run"
   },
   "keywords": [],
   "author": "",
@@ -25,6 +25,7 @@
     "@types/socket.io": "^2.1.8",
     "ts-node": "^8.10.2",
     "ts-node-dev": "^1.0.0-pre.48",
+    "tsconfig-paths": "^3.9.0",
     "typescript": "^3.9.5"
   }
 }

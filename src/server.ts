@@ -5,7 +5,7 @@ import socket from 'socket.io';
 import routes from './routes';
 import session from 'express-session';
 
-import MessageEvent from "./events/MessageEvent";
+import MessageEvent from "@events/MessageEvent";
 const messageEvent = new MessageEvent();
 
 /**

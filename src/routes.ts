@@ -1,9 +1,9 @@
 import express from 'express';
 const routes = express.Router();
 
-import HomeController from './controllers/HomeController';
-import UserController from './controllers/UserController';
-import AuthController from './controllers/AuthController';
+import HomeController from '@controllers/HomeController';
+import UserController from '@controllers/UserController';
+import AuthController from '@controllers/AuthController';
 
 const authController = new AuthController();
 const homeController = new HomeController();
