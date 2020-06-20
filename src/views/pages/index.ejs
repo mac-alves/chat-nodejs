@@ -1,12 +1,117 @@
 <%- include ../blocks/templates/auth/head -%>
-    
+    <div class="container">
+        <div class="contacts-container">
+            <div class="search">
+                <input type="text" placeholder="Pesquisar"/>
+            </div>
+            <ul class="contacts">
+                <li class="contact">
+                    <img src="" alt="">
+                    <div class="info-contact">
+                        <h3 class="name">Vincent Porter</h3>
+                        <p class="last-acess status">online</p>
+                    </div>
+                </li>
+                <li class="contact">
+                    <img src="" alt="">
+                    <div class="info-contact">
+                        <h3 class="name">Vincent Porter</h3>
+                        <p class="last-acess status online">online</p>
+                    </div>
+                </li>
+                <li class="contact">
+                    <img src="" alt="">
+                    <div class="info-contact">
+                        <h3 class="name">Vincent Porter</h3>
+                        <p class="last-acess status">online</p>
+                    </div>
+                </li>
+                <li class="contact">
+                    <img src="" alt="">
+                    <div class="info-contact">
+                        <h3 class="name">Vincent Porter</h3>
+                        <p class="last-acess status">online</p>
+                    </div>
+                </li>
+            </ul>
+            <div class="sair-container">
+                <button id="logout">Sair</button>
+            </div>
+        </div>
+        <div class="chat-container">
+            <header>
+                <div class="contact-chat">
+                    <img src="" alt="">
+                    <div class="info-contact-chat">
+                        <h3 class="name">Vincent Porter</h3>
+                        <p class="last-acess status">online</p>
+                    </div>
+                </div>
+                <div class="star">
+                    <i class="fa fa-star"></i>
+                </div>
+            </header>
+            <main class="chat-history">
+                <ul>
+                    <li>
+                        <div class="msg-info">
+                            <span class="info-date-time">10:14 AM, Today</span>
+                            <span class="info-name">Olia</span>
+                        </div>
+                        <div class="box-message">
+                            Well I am not sure. The rest of the team is not here yet. Maybe in an hour or so? Have you faced any problems at the last phase of the project?
+                        </div>
+                    </li>
+                    <li class="clearfix">
+                        <div class="msg-info">
+                            <span class="info-date-time">10:14 AM, Today</span>
+                            <span class="info-name">Vincent</span>
+                        </div>
+                        <div class="box-message">
+                            Are we meeting today? Project has been already finished and I have results to show you.
+                        </div>
+                    </li>
+                    <li class="clearfix">
+                        <div class="msg-info">
+                            <span class="info-date-time">10:14 AM, Today</span>
+                            <span class="info-name">Vincent</span>
+                        </div>
+                        <div class="box-message">
+                            Are we meeting today? Project has been already finished and I have results to show you.
+                        </div>
+                    </li>
+                    <li>
+                        <div class="msg-info">
+                            <span class="info-date-time">10:14 AM, Today</span>
+                            <span class="info-name">Olia</span>
+                        </div>
+                        <div class="box-message">
+                            Well I am not sure. The rest of the team is not here yet. Maybe in an hour or so? Have you faced any problems at the last phase of the project?
+                        </div>
+                    </li>
+                    <li>
+                        <div class="msg-info">
+                            <span class="info-date-time">10:14 AM, Today</span>
+                            <span class="info-name">Olia</span>
+                        </div>
+                        <div class="box-message">
+                            Well I am not sure. The rest of the team is not here yet. Maybe in an hour or so? Have you faced any problems at the last phase of the project?
+                        </div>
+                    </li>
+                </ul>
+            </main>
+            <footer class="chat-message">
+                <textarea name="" id="" class="message-camp" placeholder="Digite sua mensagem"></textarea>
+                <button type="button" class="submit">Send</button>
+            </footer>
+        </div>
+    </div>
+
     <form id="chat">
         <input type="text" name="username" placeholder="Usuario">
         <div class="messages"></div>
         <input type="text" name="mensage" placeholder="Mensagem">
         <button type="submit">Enviar</button>
     </form>
-
-    <button id="logout">Sair</button>
 
 <%- include ../blocks/templates/auth/footer -%>

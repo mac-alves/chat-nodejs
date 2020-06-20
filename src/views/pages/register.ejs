@@ -1,9 +1,13 @@
 <%- include ../blocks/templates/head -%>
-    
-    <form id="register">
-        <input type="text" name="name" id="userName" placeholder="Usuario">
-        <span id="error"></span>
-        <button type="submit">Criar Conta</button>
-    </form>
-
+    <div class="container">
+        <div class="content">
+            <img src="img/register.svg" alt="" height="300" class="img-login">
+            <form id="register" class="form">
+                <input type="text" name="name" id="userName" placeholder="Usuario">
+                <span id="error" class="error"></span>
+                <button type="submit">Criar Conta</button>
+            </form>
+            <a href="/login" class="register-login">Voltar ao Login</a>
+        </div>
+    </div>
 <%- include ../blocks/templates/footer -%> 

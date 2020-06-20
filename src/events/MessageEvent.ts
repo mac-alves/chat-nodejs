@@ -13,9 +13,9 @@ class MessageEvent {
         socket.emit('previousMessages', []);
     
         /**
-         * Adiciona e envia a mensagem enviada
+         * Adiciona no banco e envia a mensagem enviada
          */
-        socket.on('sendMessage', data => {
+        socket.on('sendMessage', async (data) => {
             console.log(data);
             
             const { } = data;

@@ -1,45 +1,124 @@
-html, body {
-  height: 100%;
-}
 
 * {
   margin: 0;
   padding: 0;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+  
 }
 
-#chat {
-  height: 100%;
+body{
+  /* background-color: #C5DDEB; */
+}
+
+button:focus,
+input:focus {
+  outline: 0;
+}
+
+.container{
+  display: flex;
+  width: 750px;
+  height: 850px;
+  position: relative;
+  top: 50px;
+  margin: auto;
+  /* background-color: #444753; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content{
+  width: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
 
-input {
-  width: 600px;
-  border: 1px solid #ddd;
-  height: 50px;
-  padding: 0 20px;
-  font-size: 14px;
+.img-login{
+  width: 300px;
+  margin-bottom: 20px;
 }
 
-button {
-  width: 600px;
-  height: 50px;
-  font-size: 14px;
-  background: #069;
-  text-align: center;
-  line-height: 50px;
-  font-weight: bold;
-  color: #FFF;
-  margin-top: 10px;
+.form{
+  /* background-color: tomato; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  padding: 10px;
 }
 
-.messages {
-  width: 600px;
-  height: 400px;
-  margin: 20px 0;
-  border: 1px solid #ddd;
-  padding: 20px;
+.form input{
+  width: 100%;
+  height: 50px;
+  /* background-color: #6a6c75; */
+  border: 1px solid #94C2ED;
+  border-radius: 3px;
+  color: #333;
+  padding-left: 10px;
+  font-size: 20px;
+  margin-bottom: 3px;
+  border-radius: 7px;
+}
+
+.form input:focus{
+  outline: 0;
+}
+
+.form input.is-error{
+  border: 1px solid tomato;
+}
+
+.form .error{
+  margin-bottom: 10px;
+  width: 100%;
+  padding-left: 10px;
+  color: tomato;
+}
+
+.form ::-webkit-input-placeholder{
+  color: #aaa;
+}
+.form :-moz-placeholder { /* Firefox 18- */
+  color: #aaa;
+}
+.form ::-moz-placeholder {  /* Firefox 19+ */
+  color: #aaa;
+}
+.form :-ms-input-placeholder{
+  color: #aaa;
+}
+
+.form button {
+  width: 100%;
+  height: 50px;
+  font-size: 18px;
+  cursor: pointer;
+  border: none;
+  border-radius: 7px;
+  /* margin-bottom: 10px; */
+  background-color: #94C2ED;
+  color: #fff;
+}
+
+.register-login{
+  height: 40px;
+  font-size: 18px;
+  cursor: pointer;
+  /* background-color: tomato; */
+  margin: 0 10px;
+  line-height: 40px;
+  color: #aaa;
+  transition: all 0.3s linear;
+}
+
+.register-login:hover{
+  color: #555;
+  /* text-decoration: underline; */
 }

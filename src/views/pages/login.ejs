@@ -1,10 +1,14 @@
 <%- include ../blocks/templates/head -%>
-    
-    <form id="login">
-        <input type="text" name="name" id="userName" placeholder="Usuario">
-        <span id="error"></span>
-        <button type="submit">Entrar</button>
-    </form>
-    <a href="/user-new">Crie uma conta</a>
+    <div class="container">
+        <div class="content">
+            <img src="img/login.svg" alt="" class="img-login">
+            <form id="login" class="form">
+                <input type="text" name="name" id="userName" placeholder="Usuario">
+                <span id="error" class="error"></span>
+                <button type="submit">Entrar</button>
+            </form>
+            <a href="/user-new" class="register-login">Crie uma conta</a>
+        </div>
+    </div>
 
-<%- include ../blocks/templates/footer -%>
+<%- include ../blocks/templates/footer -%> 
