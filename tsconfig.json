@@ -5,10 +5,7 @@
     "lib": ["ES6"],                           
     "allowJs": true,                     
     "outDir": "./dist",                      
-    "rootDirs": [
-      "./src",
-      "./public/js"
-    ],                     
+    "rootDir": "./src",                     
     "removeComments": true,
     "typeRoots": [
       "./node_modules/@types",
@@ -25,6 +22,9 @@
       "@controllers/*": ["./src/controllers/*"],
       "@events/*":["./src/events/*"],
       "@views/*":["./src/views/*"]
-    }
-  }
+    },
+  },
+  "include":[
+    "src/**/*"
+  ]
 }
