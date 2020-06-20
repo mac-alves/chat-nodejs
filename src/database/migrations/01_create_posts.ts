@@ -12,7 +12,8 @@ export async function up(knex: Knex) {
              .notNullable()
              .references('id')
              .inTable('users');
-        table.dateTime('created_at');
+        table.timestamp('created_at')
+             .defaultTo(knex.fn.now());
     })
 }
 

@@ -1,18 +1,31 @@
 /**
- * form de login
+ * Realica a requisição mediante o path passado
+ * 
+ * @param path 
  */
-$('#login').submit(function(event){
-    event.preventDefault();
+function postSubmit(path) {
     var userName = $('#userName').val();
 
     if (userName.length) {
-        $.post('/login', {name: userName}, () => {
-            responseSuccess();
+        $.post(`/${path}`, {name: userName}, (data, status, xhr) => {
+            if (data.userId) {
+                localStorage.setItem('@userId', data.userId);
+                responseSuccess();
+            }
         }, error => {
             console.log("Erro: ", error);
             responseError(error.responseJSON.error)
         });
     }
+}
+
+
+/**
+ * form de login
+ */
+$('#login').submit(function(event){
+    event.preventDefault();
+    postSubmit('login');
 });
 
 /**
@@ -20,14 +33,5 @@ $('#login').submit(function(event){
  */
 $('#register').submit(function(event){
     event.preventDefault();
-    var userName = $('#userName').val();
-
-    if (userName.length) {
-        $.post('/users', {name: userName}, () => {
-            responseSuccess();
-        }, error => {
-            console.log("Erro: ", error);
-            responseError(error.responseJSON.error)
-        });
-    }
+    postSubmit('users');
 });

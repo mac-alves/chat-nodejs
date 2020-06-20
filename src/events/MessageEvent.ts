@@ -2,7 +2,6 @@ import { Socket } from 'socket.io';
 import knex from '../database/connection';
 
 class MessageEvent {
-    public messages: any[] = [];
 
     onConnect(socket: Socket) {
         console.log(`socket conectado ${socket.id}`);
@@ -17,10 +16,29 @@ class MessageEvent {
          */
         socket.on('sendMessage', async (data) => {
             console.log(data);
+            const { from_user, to_user, body } = data;
+
+            const toUserExist = await knex('users')
+                .where('id', to_user)
+                .select('*');
             
-            const { } = data;
-            // this.messages.push(data);
-            socket.broadcast.emit('receiveMessage', data);
+            if (toUserExist.length === 0) {
+                // socket.broadcast
+                socket.emit('receiveMessage', {
+                    success: false,
+                    error: 'Usuarios destino não existem.'
+                });
+
+                return
+            }
+
+            const msgCreated = await knex('posts')
+                .insert({ from_user, to_user, body });
+
+            const newMsg = await knex('posts')
+                .where('id', msgCreated[0]).select('*');
+            
+            socket.emit('receiveMessage', newMsg);
         });
     }
 }   

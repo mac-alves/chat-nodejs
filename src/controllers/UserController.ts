@@ -23,7 +23,11 @@ class UserController {
             request.session.userId = newUser[0];
         }
         
-        return response.status(200).json({ error: '', success: true });
+        return response.status(200).json({ 
+            error: '', 
+            success: true, 
+            userId: newUser[0]
+        });
     }
 }
 

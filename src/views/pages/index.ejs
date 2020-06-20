@@ -100,18 +100,33 @@
                     </li>
                 </ul>
             </main>
-            <footer class="chat-message">
-                <textarea name="" id="" class="message-camp" placeholder="Digite sua mensagem"></textarea>
-                <button type="button" class="submit">Send</button>
-            </footer>
+            <form id="chat" class="chat-message">
+                <input type="hidden" name="from_user" id="from_user">
+                <input type="hidden" name="to_user" id="to_user" value="2">
+                <textarea name="body" id="body" class="message-camp" placeholder="Digite sua mensagem"></textarea>
+                <button type="submit" class="submit">Enviar</button>
+            </form>
         </div>
     </div>
 
-    <form id="chat">
-        <input type="text" name="username" placeholder="Usuario">
-        <div class="messages"></div>
-        <input type="text" name="mensage" placeholder="Mensagem">
-        <button type="submit">Enviar</button>
-    </form>
-
+    <script id="msg-template" type="text/x-handlebars-template">
+        <li>
+            <div class="msg-info">
+                <span class="info-date-time">{{createdAt}}</span>
+                <span class="info-name">{{userName}}</span>
+            </div>
+            <div class="box-message">{{messageOutput}}</div>
+        </li>
+    </script>
+      
+    <script id="msg-response-template" type="text/x-handlebars-template">
+        <li class="clearfix">
+            <div class="msg-info">
+                <span class="info-date-time">{{createdAt}}</span>
+                <span class="info-name">{{userName}}</span>
+            </div>
+            <div class="box-message">{{messageOutput}}</div>
+        </li>
+    </script>
+    
 <%- include ../blocks/templates/auth/footer -%>

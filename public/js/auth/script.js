@@ -1,29 +1,30 @@
-$('#chat').submit(function(event){
-    event.preventDefault();
+(function(){
 
-    var author = $('input[name=username]').val();
-    var mensage = $('input[name=mensage]').val();
-
-    if (author.length && mensage.length) {
-        var mensageObject = {
-            author:author,
-            message:mensage
-        };
-
-        menssageRender(mensageObject);
-
-        socket.emit('sendMessage', mensageObject);
+    const chat = {
+        init: function() {
+            this.cacheDOM();
+            this.scrollToBottom();
+        },
+        cacheDOM: function() {
+            this.$chatHistory = $('.chat-history');
+        },
+        scrollToBottom: function() {
+            this.$chatHistory.scrollTop(this.$chatHistory[0].scrollHeight);
+        },
     }
-});
 
-/**
- * Logout
- */
-$('#logout').click(event => {
-    $.post('/logout', {}, (data, status, xhr) => {
-        responseSuccess();
-    }, error => {
-        console.log("Erro: ", error);
-        responseError(error.responseJSON.error)
+    chat.init();
+
+    /**
+     * Logout
+     */
+    $('#logout').click(event => {
+        $.post('/logout', {}, (data, status, xhr) => {
+            localStorage.clear();
+            responseSuccess();
+        }, error => {
+            console.log("Erro: ", error);
+            responseError(error.responseJSON.error)
+        });
     });
-});
+})();
