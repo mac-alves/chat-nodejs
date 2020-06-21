@@ -1,66 +1,105 @@
-(function(){
+/**
+ * Factory para o socket.io
+ */
+const socketFactory = {
 
-    const socketFactory = {
+    init: function() {
+        this.cacheDOM();
+        this.scrollToBottom();
+    },
 
-        init: function() {
-            this.cacheDOM();
-            this.scrollToBottom();
-        },
+    cacheDOM: function() {
+        this.$chatHistory = $('.chat-history');
+        this.$chatHistoryList = this.$chatHistory.find('ul');
+    },
 
-        cacheDOM: function() {
-            this.$chatHistory = $('.chat-history');
-            this.$chatHistoryList =  this.$chatHistory.find('ul');
-        },
+    scrollToBottom: function() {
+        this.$chatHistory.scrollTop(this.$chatHistory[0].scrollHeight);
+    },
 
-        scrollToBottom: function() {
-            this.$chatHistory.scrollTop(this.$chatHistory[0].scrollHeight);
-        },
+    diaMsg: function(date){
+        const [dia, mes, ano] = date.split('/');
+        const [diaCurr, mesCurr, anoCurr] = new Date()
+            .toLocaleString()
+            .split(' ')[0]
+            .split('/');
 
-        render: function(message) {
-            this.scrollToBottom();
-
-            if (this.messageToSend.trim() !== '') {
-                const template = Handlebars.compile($("#msg-template").html());
-                const context = {
-                    createdAt: '10:14, hoje',
-                    userName: 'mac',
-                    messageOutput: 'this.messageToSend',
-                };
-      
-                this.$chatHistoryList.append(template(context));
-                this.scrollToBottom();
-              
-                // responses
-                var templateResponse = Handlebars.compile($("#msg-response-template").html());
-                const contextResponse = {
-                    createdAt: '10:14, hoje',
-                    userName: 'keren',
-                    messageOutput: 'this.messageToSend',
-                };
-              
-                setTimeout(function() {
-                    this.$chatHistoryList.append(templateResponse(contextResponse));
-                    this.scrollToBottom();
-                }.bind(this), 1500);
-            }
+        if (anoCurr !== ano || mesCurr !== mes) {
+            return date;
+        } 
+        
+        if ((Number(diaCurr) - 1) === dia) {
+            return 'Ontem';
         }
+
+        return 'Hoje'
+    },
+
+    getTimeDiaMsg: function(dateCreatedMsg) {
+        const [date, time] = new Date(dateCreatedMsg).toLocaleString().split(' ');
+
+        const timeMsg = time.replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3");
+        const statusMsg = this.diaMsg(date);
+
+        return `${timeMsg}, ${statusMsg}`;
+    },
+
+    render: function(message) {
+        this.scrollToBottom();
+        const userIdSession = localStorage.getItem('@userId');
+        const template = Handlebars.compile($("#msg-template").html());
+        const context = {
+            createdAt: this.getTimeDiaMsg(message.created_at),
+            messageOutput: message.body,
+            userName: message.from_name,
+            className: ''
+        }
+        
+        if (Number(userIdSession) === Number(message.to_user)) {
+            context.className = 'clearfix';
+        }
+
+        this.$chatHistoryList.append(template(context));
+        this.scrollToBottom();
+    }
+}
+
+/**
+ * Inicializa a factory
+ */
+socketFactory.init();
+
+/**
+ * Observa o canal e recebimento das mensagens cridas
+ */
+Socket.on(CANAL_MSG_RECEBIDAS, function(message){
+    if (!message.success) {
+        console.log(message);
+        return
     }
 
-    Socket.on('previousMessages', function(messages){
-        console.log(messages);
-        
-        for (message of messages) {
-            // menssageRender(message);
-        }			
-    });
+    socketFactory.render(message.post);
+    console.log(message);
+});
 
-    Socket.on('receiveMessage', function(messages){
-        console.log(messages);
-        // menssageRender(message);
-        for (message of messages) {
-            // menssageRender(message);
-            console.log(getFormatedTime(message.created_at));
+/**
+ * Pega as mensagens do contato selecionado
+ * 
+ * @param idContact 
+ */
+function getMessages(idContact){
+    $.get('/messages', { idContact })
+        .done(messages =>{
+            if (!messages.success) {
+                console.log(messages);
+                return
+            }
+            console.log(messages);
             
-        }
-    });
-})();
+            $('#to_user').val(idContact);
+
+            for (const message of messages.posts) {
+                socketFactory.render(message);
+            }
+        });
+}

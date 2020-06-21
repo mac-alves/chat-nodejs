@@ -322,6 +322,10 @@ body{
     margin-left: -10px;
 }
 
+.box-message pre {
+    white-space: break-spaces;
+}
+
 .clearfix .msg-info{
     justify-content: flex-start !important;
     padding-left: 20px;

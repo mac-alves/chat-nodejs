@@ -5,32 +5,18 @@
                 <input type="text" placeholder="Pesquisar"/>
             </div>
             <ul class="contacts">
-                <li class="contact">
+                <li class="contact" onclick="getMessages(1)">
                     <img src="" alt="">
                     <div class="info-contact">
-                        <h3 class="name">Vincent Porter</h3>
+                        <h3 class="name">Mac</h3>
                         <p class="last-acess status">online</p>
                     </div>
                 </li>
-                <li class="contact">
+                <li class="contact" onclick="getMessages(2)">
                     <img src="" alt="">
                     <div class="info-contact">
-                        <h3 class="name">Vincent Porter</h3>
+                        <h3 class="name">Keren</h3>
                         <p class="last-acess status online">online</p>
-                    </div>
-                </li>
-                <li class="contact">
-                    <img src="" alt="">
-                    <div class="info-contact">
-                        <h3 class="name">Vincent Porter</h3>
-                        <p class="last-acess status">online</p>
-                    </div>
-                </li>
-                <li class="contact">
-                    <img src="" alt="">
-                    <div class="info-contact">
-                        <h3 class="name">Vincent Porter</h3>
-                        <p class="last-acess status">online</p>
                     </div>
                 </li>
             </ul>
@@ -52,80 +38,25 @@
                 </div>
             </header>
             <main class="chat-history">
-                <ul>
-                    <li>
-                        <div class="msg-info">
-                            <span class="info-date-time">10:14 AM, Today</span>
-                            <span class="info-name">Olia</span>
-                        </div>
-                        <div class="box-message">
-                            Well I am not sure. The rest of the team is not here yet. Maybe in an hour or so? Have you faced any problems at the last phase of the project?
-                        </div>
-                    </li>
-                    <li class="clearfix">
-                        <div class="msg-info">
-                            <span class="info-date-time">10:14 AM, Today</span>
-                            <span class="info-name">Vincent</span>
-                        </div>
-                        <div class="box-message">
-                            Are we meeting today? Project has been already finished and I have results to show you.
-                        </div>
-                    </li>
-                    <li class="clearfix">
-                        <div class="msg-info">
-                            <span class="info-date-time">10:14 AM, Today</span>
-                            <span class="info-name">Vincent</span>
-                        </div>
-                        <div class="box-message">
-                            Are we meeting today? Project has been already finished and I have results to show you.
-                        </div>
-                    </li>
-                    <li>
-                        <div class="msg-info">
-                            <span class="info-date-time">10:14 AM, Today</span>
-                            <span class="info-name">Olia</span>
-                        </div>
-                        <div class="box-message">
-                            Well I am not sure. The rest of the team is not here yet. Maybe in an hour or so? Have you faced any problems at the last phase of the project?
-                        </div>
-                    </li>
-                    <li>
-                        <div class="msg-info">
-                            <span class="info-date-time">10:14 AM, Today</span>
-                            <span class="info-name">Olia</span>
-                        </div>
-                        <div class="box-message">
-                            Well I am not sure. The rest of the team is not here yet. Maybe in an hour or so? Have you faced any problems at the last phase of the project?
-                        </div>
-                    </li>
-                </ul>
+                <ul></ul>
             </main>
             <form id="chat" class="chat-message">
                 <input type="hidden" name="from_user" id="from_user">
-                <input type="hidden" name="to_user" id="to_user" value="2">
+                <input type="hidden" name="to_user" id="to_user">
                 <textarea name="body" id="body" class="message-camp" placeholder="Digite sua mensagem"></textarea>
                 <button type="submit" class="submit">Enviar</button>
             </form>
         </div>
     </div>
 
+    <!-- template de nova mensagem -->
     <script id="msg-template" type="text/x-handlebars-template">
-        <li>
+        <li class="{{className}}">
             <div class="msg-info">
                 <span class="info-date-time">{{createdAt}}</span>
                 <span class="info-name">{{userName}}</span>
             </div>
-            <div class="box-message">{{messageOutput}}</div>
-        </li>
-    </script>
-      
-    <script id="msg-response-template" type="text/x-handlebars-template">
-        <li class="clearfix">
-            <div class="msg-info">
-                <span class="info-date-time">{{createdAt}}</span>
-                <span class="info-name">{{userName}}</span>
-            </div>
-            <div class="box-message">{{messageOutput}}</div>
+            <div class="box-message"><pre>{{messageOutput}}</pre></div>
         </li>
     </script>
     

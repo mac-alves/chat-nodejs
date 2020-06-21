@@ -19,9 +19,10 @@ $('#chat').submit(event => {
     const from_user = localStorage.getItem('@userId');
     const to_user = $('#to_user').val();
     const body = $('#body').val();
+    const created_at = new Date();
 
     if (from_user.length && to_user.length && body.length) {
-        const msgObj = {from_user, to_user, body};
+        const msgObj = {from_user, to_user, body, created_at};
 
         Socket.emit('sendMessage', msgObj);
         $('#body').val("");
