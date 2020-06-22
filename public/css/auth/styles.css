@@ -9,8 +9,10 @@
     
 }
 
-body{
-    /* background-color: #C5DDEB; */
+button:focus,
+input:focus,
+textarea:focus{
+    outline: 0;
 }
 
 /* configurando scroll */
@@ -55,6 +57,7 @@ body{
     align-items: center;
     background-color: transparent;
     padding: 25px 30px 25px 20px;
+    position: relative;
 }
 
 .contacts-container .search input{
@@ -66,10 +69,6 @@ body{
     color: #fff;
     padding-left: 10px;
     font-size: 15px;
-}
-
-.search input:focus{
-    outline: 0;
 }
 
 .search ::-webkit-input-placeholder{
@@ -85,12 +84,28 @@ body{
     color: #aaa;
 }
 
+.search .clear-search{
+    position: absolute;
+    right: 40px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: #a6a8aa;
+}
+
 .contacts-container .contacts{
     display: flex;
     flex-direction: column;
     background-color: transparent;
     overflow: auto;
     height: 680px;
+}
+
+.contacts .not-users{
+    display: flex;
+    justify-content: center;
+    color: #d6d6d6;
 }
 
 .contacts .contact{
@@ -172,10 +187,6 @@ body{
     border-bottom-left-radius: 10px;
     color: #aaa;
     transition: all 0.3s linear;
-}
-
-.sair-container button:focus{
-    outline: 0;
 }
 
 .sair-container button:hover{
@@ -390,10 +401,6 @@ body{
     resize: none;
     margin-bottom: 10px;
     font-size: 15px;
-}
-
-.message-camp:focus{
-    outline: 0;
 }
 
 .submit{

@@ -24,7 +24,7 @@ $('#chat').submit(event => {
     if (from_user.length && to_user.length && body.length) {
         const msgObj = {from_user, to_user, body, created_at};
 
-        Socket.emit('sendMessage', msgObj);
+        Socket.emit('sendMessage', msgObj); 
         $('#body').val("");
     }
 });

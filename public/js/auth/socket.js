@@ -76,11 +76,12 @@ socketFactory.init();
  * Observa o canal e recebimento das mensagens cridas
  */
 Socket.on(CANAL_MSG_RECEBIDAS, function(message){
+    console.log(message);
     if (!message.success) {
         console.log(message);
         return
     }
-
+    
     socketFactory.render(message.post);
 });
 

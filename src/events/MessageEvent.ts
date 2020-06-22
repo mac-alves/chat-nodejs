@@ -17,7 +17,7 @@ class MessageEvent {
                 .select('*');
             
             if (toUserExist.length === 0) {
-                // socket.broadcast
+                // 
                 socket.emit('receiveMessage', {
                     success: false,
                     error: 'Usuarios destino não existem.',

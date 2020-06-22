@@ -62,10 +62,9 @@ const users = {
                     console.log(usersResponse);
                     return
                 }
-                console.log(usersResponse);
                 
                 $('#contacts').html('');
-    
+
                 for (const user of usersResponse.users) {
                     this.render(user);
                 }
@@ -83,6 +82,12 @@ users.init();
  */
 function getUsers(){
     const nameUser = $('#search').val();
+    
+    if (nameUser.length === 0) {
+        $('#clear-search').click();
+    } else {
+        $('#clear-search').html('<i class="far fa-trash-alt"></i>');
+    }
 
     $.get(paths.USERS.SEARCH, { nameUser })
         .done(usersResponse =>{
@@ -92,6 +97,13 @@ function getUsers(){
             }
 
             $('#contacts').html('');
+ 
+            if (usersResponse.users.length === 0) {
+                $('#contacts').html(
+                    '<p class="not-users">Nenhum usuário encontrado.</p>'
+                );
+                return
+            }
 
             for (const user of usersResponse.users) {
                 users.render(user);
@@ -103,3 +115,24 @@ function getUsers(){
  * Debounce search
  */
 $('#search').keydown(_.debounce(getUsers, DEBOUNCE_TIME));
+
+/**
+ * Troca o icone caso search esteja vazio e descelecionado
+ */
+$('#search').focusout(function() {
+    const val = $(this).val();
+    
+    if (val.length === 0) {
+        $('#clear-search').html('<i class="fas fa-search"></i>');
+    }
+});
+
+/**
+ * Limpa a pesquisa de usuarios
+ */
+$('#clear-search').click(function(){
+    $(this).html('<i class="fas fa-search"></i>');
+    $('#search').val('');
+    
+    users.getListContacts();
+})
