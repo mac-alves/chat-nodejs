@@ -284,6 +284,7 @@ body{
     margin-left: 10px;
     color: #94c2ed;
     position: relative;
+    text-transform: capitalize;
 }
 
 .msg-info .info-name::after{
@@ -346,6 +347,7 @@ body{
     margin-left: 0;
     margin-right: 10px;
     color: #86bb71;
+    text-transform: capitalize;
 }
 
 .clearfix .info-name::after{

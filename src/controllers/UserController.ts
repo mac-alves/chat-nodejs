@@ -29,6 +29,67 @@ class UserController {
             userId: newUser[0]
         });
     }
+
+    async search(request: Request, response: Response){
+        if (!request.session?.userId) return response.redirect('login');
+
+        const userLogeed = request.session?.userId;
+        const { nameUser } = request.query;
+
+        const users = await knex('users')
+            .select('*')
+            .where('name', 'like', `%${nameUser}%`)
+            .andWhere('id', '<>', userLogeed);
+
+        return response.status(200).json({ 
+            error: '', 
+            success: true, 
+            users
+        });
+    }
+
+    async show(request: Request, response: Response){
+        if (!request.session?.userId) return response.redirect('login');
+
+        const userLogeed = request.session?.userId;
+        
+        const usersPosts = await knex('posts')
+            .distinct('from_user', 'to_user')
+            .where({
+                'posts.from_user': userLogeed,
+            })
+            .orWhere({
+                'posts.to_user': userLogeed,
+            });
+
+        if (usersPosts.length === 0) {
+            return response.status(200).json({ 
+                error: '', 
+                success: true, 
+                users: []
+            });
+        }
+
+        const idUsers = [...new Set(usersPosts.map(user => {
+            if (user.from_user === userLogeed) {
+                return user.to_user
+            }
+
+            if (user.to_user === userLogeed) {
+                return user.from_user
+            }
+        }))];
+        
+        const users = await knex('users')
+            .select('*')
+            .whereIn('id', idUsers);
+
+        return response.status(200).json({ 
+            error: '', 
+            success: true, 
+            users
+        });
+    }
 }
 
 export default UserController;

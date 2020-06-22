@@ -1,3 +1,6 @@
+const URL_LOCAL = 'http://localhost:3000';
+const Socket = io(URL_LOCAL);
+
 /**
  * Factory para o socket.io
  */
@@ -79,7 +82,6 @@ Socket.on(CANAL_MSG_RECEBIDAS, function(message){
     }
 
     socketFactory.render(message.post);
-    console.log(message);
 });
 
 /**
@@ -88,13 +90,12 @@ Socket.on(CANAL_MSG_RECEBIDAS, function(message){
  * @param idContact 
  */
 function getMessages(idContact){
-    $.get('/messages', { idContact })
+    $.get(paths.MESSAGES, { idContact })
         .done(messages =>{
             if (!messages.success) {
                 console.log(messages);
                 return
             }
-            console.log(messages);
             
             $('#to_user').val(idContact);
 

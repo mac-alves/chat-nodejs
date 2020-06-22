@@ -11,21 +11,27 @@ const homeController = new HomeController();
 const userController = new UserController();
 const messageController = new MessageController();
 
-/* home */
-routes.get('/', homeController.index);
-/* -------- */
+/** paginas */
+    /* home */
+    routes.get('/', homeController.index);
 
-/* auth */
-routes.get('/login', authController.index);
-routes.post('/login', authController.login);
-routes.post('/logout', authController.logout);
-/* -------- */
+    /* users */
+    routes.get('/user/new', userController.index);
 
-/* users */
-routes.get('/user-new', userController.index);
-routes.post('/users', userController.create);
+    /* auth */
+    routes.get('/login', authController.index);
 
-/* messages */
-routes.get('/messages', messageController.index);
+/* api */
+    /* auth */
+    routes.post('/login', authController.login);
+    routes.post('/logout', authController.logout);
+
+    /* users */
+    routes.get('/users/search', userController.search);
+    routes.get('/users/show', userController.show);
+    routes.post('/users/create', userController.create);
+
+    /* messages */
+    routes.get('/messages', messageController.index);
 
 export default routes;

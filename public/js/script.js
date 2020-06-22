@@ -7,7 +7,7 @@ function postSubmit(path) {
     var userName = $('#userName').val();
 
     if (userName.length) {
-        $.post(`/${path}`, {name: userName}, (data, status, xhr) => {
+        $.post(`${path}`, {name: userName}, (data, status, xhr) => {
             if (data.userId) {
                 localStorage.setItem('@userId', data.userId);
                 responseSuccess();
@@ -25,7 +25,7 @@ function postSubmit(path) {
  */
 $('#login').submit(function(event){
     event.preventDefault();
-    postSubmit('login');
+    postSubmit(paths.AUTH.LOGIN);
 });
 
 /**
@@ -33,5 +33,5 @@ $('#login').submit(function(event){
  */
 $('#register').submit(function(event){
     event.preventDefault();
-    postSubmit('users');
+    postSubmit(paths.USERS.CREATE);
 });

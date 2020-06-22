@@ -10,7 +10,6 @@ class MessageEvent {
          * Adiciona no banco e envia a mensagem enviada
          */
         socket.on('sendMessage', async (data) => {
-            console.log(data);
             const { from_user, to_user, body, created_at } = data;
 
             const toUserExist = await knex('users')

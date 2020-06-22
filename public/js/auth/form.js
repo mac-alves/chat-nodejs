@@ -28,3 +28,4 @@ $('#chat').submit(event => {
         $('#body').val("");
     }
 });
+

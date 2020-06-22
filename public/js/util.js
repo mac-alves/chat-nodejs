@@ -1,7 +1,18 @@
 const ENTER_KEY = 13;
-const URL_LOCAL = 'http://localhost:3000';
-const Socket = io(URL_LOCAL);
 const CANAL_MSG_RECEBIDAS = 'receiveMessage';
+
+const paths = {
+    USERS: {
+        SHOW: '/users/show',
+        SEARCH: '/users/search',
+        CREATE: '/users/create'
+    },
+    AUTH: {
+        LOGIN: '/login',
+        LOGOUT: '/logout'
+    },
+    MESSAGES: '/messages'
+}
 
 /**
  * Função chamada quando a requisição for ok

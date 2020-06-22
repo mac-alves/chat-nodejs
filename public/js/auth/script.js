@@ -1,3 +1,5 @@
+const DEBOUNCE_TIME = 1000;
+
 /**
  * Factory do painel de chat
  */
@@ -23,7 +25,7 @@ chat.init();
  * Realiza o Logout
  */
 $('#logout').click(event => {
-    $.post('/logout', {}, (data, status, xhr) => {
+    $.post(paths.AUTH.LOGOUT, {}, (data, status, xhr) => {
         localStorage.clear();
         responseSuccess();
     }, error => {
@@ -31,3 +33,73 @@ $('#logout').click(event => {
         responseError(error.responseJSON.error)
     });
 });
+
+/**
+ * Factory de usuario
+ */
+const users = {
+    init: function() {
+        this.cacheDOM();
+        this.getListContacts();
+    },
+    cacheDOM: function() {
+        this.$contacts = $('#contacts');
+    },
+    render: function(user) {
+        const template = Handlebars.compile($("#contact-template").html());
+        const context = {
+            idUser: user.id,
+            userName: user.name,
+            status: 'online'
+        }
+
+        this.$contacts.append(template(context));
+    },
+    getListContacts: function(){
+        $.get(paths.USERS.SHOW)
+            .done(usersResponse =>{
+                if (!usersResponse.success) {
+                    console.log(usersResponse);
+                    return
+                }
+                console.log(usersResponse);
+                
+                $('#contacts').html('');
+    
+                for (const user of usersResponse.users) {
+                    this.render(user);
+                }
+            });
+    }
+}
+
+/**
+ * Inicializa a factory
+ */
+users.init();
+
+/**
+ * Requisita a lista de usuarios
+ */
+function getUsers(){
+    const nameUser = $('#search').val();
+
+    $.get(paths.USERS.SEARCH, { nameUser })
+        .done(usersResponse =>{
+            if (!usersResponse.success) {
+                console.log(usersResponse);
+                return
+            }
+
+            $('#contacts').html('');
+
+            for (const user of usersResponse.users) {
+                users.render(user);
+            }
+        });
+}
+
+/**
+ * Debounce search
+ */
+$('#search').keydown(_.debounce(getUsers, DEBOUNCE_TIME));
