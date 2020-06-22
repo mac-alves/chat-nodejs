@@ -201,6 +201,45 @@ textarea:focus{
     border-bottom-right-radius: 10px;
     display: flex;
     flex-direction: column;
+    position: relative;
+}
+
+.baner-inicial {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.baner-inicial img{
+    max-width: 400px;
+}
+
+.baner-inicial p{
+    text-align: center;
+    margin-top: 20px;
+    color: #6a6c75;
+}
+
+.baner-inicial i{
+    position: absolute;
+    text-align: center;
+    color: #6a6c75;
+    bottom: 20px;
+    font-size: 14px;
+}
+
+.baner-inicial i a{
+    color: #444753;
+    font-weight: bold;
+}
+
+.baner-inicial.active {
+    display: none;
 }
 
 .chat-container header{
@@ -422,4 +461,8 @@ textarea:focus{
 
 .submit:hover{
     text-decoration: underline;
+}
+
+.inicial {
+    display: none !important;
 }

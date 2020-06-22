@@ -4,12 +4,14 @@
  * @param path 
  */
 function postSubmit(path) {
-    var userName = $('#userName').val();
+    const userName = $('#userName').val();
 
     if (userName.length) {
-        $.post(`${path}`, {name: userName}, (data, status, xhr) => {
-            if (data.userId) {
-                localStorage.setItem('@userId', data.userId);
+        $.post(`${path}`, {name: userName}, (data, status, xhr) => {            
+            if (data.user) {
+                const legged = JSON.stringify(data.user);
+                
+                localStorage.setItem('@user', legged);
                 responseSuccess();
             }
         }, error => {
@@ -18,7 +20,6 @@ function postSubmit(path) {
         });
     }
 }
-
 
 /**
  * form de login

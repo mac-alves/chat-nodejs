@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import knex from '../database/connection';
+import crypto from 'crypto';
  
 class UserController {
     async index(request: Request, response: Response) {
@@ -16,17 +17,18 @@ class UserController {
                 success: false 
             });
         }
-
-        const newUser = await knex('users').insert({ name });
+        const token = crypto.randomBytes(5).toString('hex');
+        const userId = await knex('users').insert({ name, token });
+        const newUser = await knex('users').select('*').where('id', userId[0]);
 
         if (request.session) {
-            request.session.userId = newUser[0];
+            request.session.userId = newUser[0].id;
         }
         
         return response.status(200).json({ 
             error: '', 
             success: true, 
-            userId: newUser[0]
+            user: newUser[0]
         });
     }
 
@@ -69,7 +71,7 @@ class UserController {
                 users: []
             });
         }
-
+        
         const idUsers = [...new Set(usersPosts.map(user => {
             if (user.from_user === userLogeed) {
                 return user.to_user

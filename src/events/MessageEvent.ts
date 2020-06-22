@@ -5,20 +5,19 @@ class MessageEvent {
 
     onConnect(socket: Socket) {
         console.log(`socket conectado ${socket.id}`);
-    
+
         /**
          * Adiciona no banco e envia a mensagem enviada
          */
-        socket.on('sendMessage', async (data) => {
-            const { from_user, to_user, body, created_at } = data;
+        socket.on('send-message', async (data) => {
+            const { from_user, to_user, body, token, created_at } = data;
 
             const toUserExist = await knex('users')
                 .where('id', to_user)
                 .select('*');
             
             if (toUserExist.length === 0) {
-                // 
-                socket.emit('receiveMessage', {
+                socket.broadcast.emit(`receive-message-${token}`, {
                     success: false,
                     error: 'Usuarios destino não existem.',
                     post: []
@@ -39,7 +38,7 @@ class MessageEvent {
                 .join('users as usr_from', 'posts.from_user', '=', 'usr_from.id')
                 .where('posts.id', msgCreated[0])
                 
-            socket.emit('receiveMessage', {
+            socket.broadcast.emit(`receive-message-${token}`, {
                 success: true,
                 error: '',
                 post: newMsg[0]

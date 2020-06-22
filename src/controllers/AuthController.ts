@@ -22,7 +22,7 @@ class AuthController {
       request.session.userId = user[0].id
     }
 
-    response.status(200).json({ error: '', success: true, userId: user[0].id })
+    response.status(200).json({ error: '', success: true, user: user[0] })
   }
 
   async logout (request: Request, response: Response) {
