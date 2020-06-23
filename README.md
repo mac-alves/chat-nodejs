@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img alt="Design+Code" src="https://res.cloudinary.com/dpf7e7tpc/image/upload/v1592875130/projetos/chatnode_sat1zi.gif" />
+  <img wi alt="ChatNode" width="550" src="https://res.cloudinary.com/dpf7e7tpc/image/upload/v1592875130/projetos/chatnode_sat1zi.gif" />
 </h1>
 
 <h1 align="center">
