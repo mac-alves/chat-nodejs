@@ -18,7 +18,7 @@ class UserController {
             });
         }
         const token = crypto.randomBytes(5).toString('hex');
-        const userId = await knex('users').insert({ name, token });
+        const userId = await knex('users').insert({ name, token }).returning('id');
         const newUser = await knex('users').select('*').where('id', userId[0]);
 
         if (request.session) {

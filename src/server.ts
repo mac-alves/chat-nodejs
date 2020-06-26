@@ -47,6 +47,6 @@ io.on('connection', messageEvent.onConnect);
  */
 server.listen(process.env.PORT || 3000, () => {
 	console.log(
-		`Server iniciado em: ${process.env.APP_URL}:${process.env.APP_PORT}`
+		`Server iniciado em: ${process.env.APP_URL}`
 	);
 });

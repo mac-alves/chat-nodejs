@@ -27,7 +27,7 @@ class MessageEvent {
             }
 
             const msgCreated = await knex('posts')
-                .insert({ from_user, to_user, body, created_at });
+                .insert({ from_user, to_user, body, created_at }).returning('id');
 
             const newMsg = await knex('posts')
                 .select(
