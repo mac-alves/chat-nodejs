@@ -1,5 +1,5 @@
 const USER_LOGGED = JSON.parse(localStorage.getItem('@user'));
-const URL_LOCAL = 'http://localhost:3000';
+const URL_LOCAL = window.location.origin;
 const Socket = io(URL_LOCAL);
 const DEBOUNCE_TIME = 1000;
 
