@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img alt="Design+Code" src="https://res.cloudinary.com/dpf7e7tpc/image/upload/v1592875130/projetos/chatnode_sat1zi.gif" />
+  <img alt="Design+Code" wi src="https://res.cloudinary.com/dpf7e7tpc/image/upload/v1592875130/projetos/chatnode_sat1zi.gif" />
 </h1>
 
 <h1 align="center">
@@ -40,6 +40,7 @@ This project was developed with the following technologies:
 -  [Ejs](https://ejs.co/)
 -  [Express-Session](https://github.com/expressjs/session)
 -  [SQLite](https://www.sqlite.org/index.html)
+-  [JQuery](https://jquery.com/)
 -  [Ts-Node-Dev](https://github.com/whitecolor/ts-node-dev)
 -  [VS Code][vc] with [EditorConfig][vceditconfig]
 
