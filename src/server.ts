@@ -1,3 +1,6 @@
+import dotenv from 'dotenv';
+dotenv.config()
+
 import express from 'express';
 import path from 'path';
 import http from 'http';
@@ -19,7 +22,7 @@ const io = socket(server);
  * Configuracoes de sessao
  */
 app.use(session({
-	secret: '23efmoi43j42223',
+	secret: process.env.KEY_SECRET_SESSION,
 	resave: true,
 	saveUninitialized: true
 }));
@@ -42,6 +45,8 @@ io.on('connection', messageEvent.onConnect);
 /**
  * Inicializacao do servidor
  */
-server.listen(3000, () => {
-	console.log("Server iniciado em http://localhost:3000");
+server.listen(process.env.APP_PORT || 3000, () => {
+	console.log(
+		`Server iniciado em: ${process.env.APP_URL}:${process.env.APP_PORT}`
+	);
 });
